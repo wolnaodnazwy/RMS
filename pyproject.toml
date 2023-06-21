@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "rms"
+name = "RMS"
 version = "0.0.1"
 description = "Resource management application"
 authors = ["Your Name <you@example.com>"]
