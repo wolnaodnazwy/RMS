@@ -1,6 +1,7 @@
 import pandas as pd
 import os.path
 from sqlalchemy import create_engine
+import subprocess
 
 def collect_data():
     # Zbieranie danych z różnych źródeł
@@ -59,19 +60,15 @@ def export_to_csv(dataframe, filename):
         # Jeśli plik nie istnieje, utwórz nowy plik CSV
         dataframe.to_csv(filename, index=False)
         print(f"Nowy plik {filename} został utworzony.")
-    
-#def export_to_database(dataframe, database_name, table_name):
-    # Eksportowanie danych do bazy danych SQLite
- #   engine = create_engine(f'sqlite:///{database_name}')
-  #  dataframe.to_sql(table_name, con=engine, if_exists='replace', index=False)
-   # print(f"Dane zostały wyeksportowane do tabeli {table_name} w bazie danych {database_name}.")
 
 def main():
     # Główna funkcja programu
     equipment_data, service_data = collect_data()
     export_to_csv(equipment_data, 'results/data.csv')
     export_to_csv(service_data, 'results/service.csv')
-  #  export_to_database(data, 'dane.db', 'tabela_danych')
+    
+    # Uruchomienie drugiego skryptu
+    subprocess.run(['python', 'dataToDB.py'])
 
 if __name__ == '__main__':
     main()

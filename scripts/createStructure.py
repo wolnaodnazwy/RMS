@@ -5,7 +5,7 @@ def create_database_structure():
     cursor = conn.cursor()
 
     # Tworzenie tabeli 'dane'
-    cursor.execute('''CREATE TABLE IF NOT EXISTS dane (
+    cursor.execute('''CREATE TABLE IF NOT EXISTS data (
                         Typ_urzadzenia TEXT,
                         Numer_seryjny TEXT,
                         Lokalizacja TEXT,

@@ -5,7 +5,7 @@ def insert_test_data():
     cursor = conn.cursor()
 
     # Wstawianie danych testowych do tabeli 'dane'
-    cursor.execute('''INSERT INTO dane (
+    cursor.execute('''INSERT INTO data (
                         Typ_urzadzenia, Numer_seryjny, Lokalizacja,
                         Data_zakupu, Gwarancja
                     ) VALUES

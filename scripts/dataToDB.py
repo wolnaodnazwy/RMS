@@ -3,7 +3,7 @@ import pandas as pd
 
 def create_table(conn):
     # Tworzenie tabeli w bazie danych
-    conn.execute('''CREATE TABLE IF NOT EXISTS dane (
+    conn.execute('''CREATE TABLE IF NOT EXISTS data (
                         Typ_urzadzenia TEXT,
                         Numer_seryjny TEXT,
                         Lokalizacja TEXT,
@@ -20,7 +20,7 @@ def create_table(conn):
 
 def insert_equipment_data(conn, data):
     # Wstawianie danych o sprzęcie do tabeli w bazie danych
-    conn.executemany('''INSERT INTO dane (
+    conn.executemany('''INSERT INTO data (
                         Typ_urzadzenia, Numer_seryjny, Lokalizacja,
                         Data_zakupu, Gwarancja
                     ) VALUES (?, ?, ?, ?, ?);''', data)
@@ -52,7 +52,7 @@ def main():
 
     # Przekształcenie danych o sprzęcie z DataFrame na listę krotek
     equipment_tuples = list(equipment_data.itertuples(index=False, name=None))
-    # Wstawianie danych o sprzęcie do tabeli "dane"
+    # Wstawianie danych o sprzęcie do tabeli "data"
     insert_equipment_data(conn, equipment_tuples)
 
     # Przekształcenie danych o przeglądzie z DataFrame na listę krotek

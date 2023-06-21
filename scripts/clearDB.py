@@ -5,7 +5,7 @@ def clear_database():
     cursor = conn.cursor()
 
     # Usuwanie wszystkich danych z tabeli 'dane'
-    cursor.execute('DELETE FROM dane;')
+    cursor.execute('DELETE FROM data;')
 
     # Usuwanie wszystkich danych z tabeli 'service'
     cursor.execute('DELETE FROM service;')
