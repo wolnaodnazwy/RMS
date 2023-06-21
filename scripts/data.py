@@ -4,7 +4,8 @@ from sqlalchemy import create_engine
 
 def collect_data():
     # Zbieranie danych z różnych źródeł
-    data = []
+    equipment_data = []
+    service_data = []
     # Logika zbierania danych
     
     while True:
@@ -18,23 +19,32 @@ def collect_data():
             location = input("Podaj lokalizację urządzenia: ")
             purchase_date = input("Podaj datę zakupu urządzenia: ")
             warranty = input("Podaj informację o gwarancji urządzenia: ")
-            maintenance_schedule = input("Podaj plan przeglądów i konserwacji urządzenia: ")
             # Dodawanie informacji do zbioru danych
-            data.append({
-            'Typ urządzenia': device_type,
-            'Numer seryjny': serial_number,
-            'Lokalizacja': location,
-            'Data zakupu': purchase_date,
-            'Gwarancja': warranty,
-            'Plan przeglądów i konserwacji': maintenance_schedule
+            equipment_data.append({
+                'Typ urządzenia': device_type,
+                'Numer seryjny': serial_number,
+                'Lokalizacja': location,
+                'Data zakupu': purchase_date,
+                'Gwarancja': warranty
+            })
+        
+             # Dodawanie informacji o przeglądzie
+            service_date = input("Podaj datę przeglądu: ")
+            service_result = input("Podaj wynik przeglądu: ")
+            # Dodawanie informacji do zbioru danych
+            service_data.append({
+                'Numer seryjny': serial_number,
+                'Data przeglądu': service_date,
+                'Wynik przeglądu': service_result
             })
         else: 
              print(f"Błędna odpowiedź! Proszę wybrać 'Tak' lub 'Nie'.")
     
 
     # Zwracanie zebranych danych jako obiekt DataFrame z biblioteki pandas
-    df = pd.DataFrame(data)
-    return df
+    equipment_df = pd.DataFrame(equipment_data)
+    service_df = pd.DataFrame(service_data)
+    return equipment_df, service_df
 
 def export_to_csv(dataframe, filename):
     if os.path.isfile(filename):
@@ -58,8 +68,9 @@ def export_to_csv(dataframe, filename):
 
 def main():
     # Główna funkcja programu
-    data = collect_data()
-    export_to_csv(data, 'dane.csv')
+    equipment_data, service_data = collect_data()
+    export_to_csv(equipment_data, 'results/data.csv')
+    export_to_csv(service_data, 'results/service.csv')
   #  export_to_database(data, 'dane.db', 'tabela_danych')
 
 if __name__ == '__main__':
