@@ -1,10 +1,16 @@
-import sqlite3
+import psycopg2
 
 def insert_test_data():
-    conn = sqlite3.connect('results/rms.db')
+    conn = psycopg2.connect(
+        host='127.0.0.1',
+        port='5432',
+        dbname='student02db',
+        user='student02',
+        password='852BSW529qfdpxGRP'
+    )
     cursor = conn.cursor()
 
-    # Wstawianie danych testowych do tabeli 'dane'
+    # Wstawianie danych testowych do tabeli 'data'
     cursor.execute('''INSERT INTO data (
                         Typ_urzadzenia, Numer_seryjny, Lokalizacja,
                         Data_zakupu, Gwarancja

@@ -1,7 +1,13 @@
-import sqlite3
+import psycopg2
 
 def create_database_structure():
-    conn = sqlite3.connect('results/rms.db')
+    conn = psycopg2.connect(
+        host='127.0.0.1',
+        port='5432',
+        dbname='student02db',
+        user='student02',
+        password='852BSW529qfdpxGRP'
+    )
     cursor = conn.cursor()
 
     # Tworzenie tabeli 'dane'

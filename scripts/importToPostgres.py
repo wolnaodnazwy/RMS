@@ -49,7 +49,6 @@ def convert_sqlite_to_postgresql(sqlite_path, postgresql_connection_string):
 
 if __name__ == '__main__':
     sqlite_path = 'results/rms.db'
-    # !!!!!!!!!!!!!!!!!!!!!!Nalezy zamienic: username, password, database_name!!!!!!!!!!!!!!!!!!!!!!!
-    postgresql_connection_string = "postgresql://username:password@localhost:5432/database_name"
+    postgresql_connection_string = "host='127.0.0.1' port='5432' dbname='student02db' user='student02' password='852BSW529qfdpxGRP'"
 
     convert_sqlite_to_postgresql(sqlite_path, postgresql_connection_string)
