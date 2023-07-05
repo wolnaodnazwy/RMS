@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "RMS"
+version = "0.0.1"
+description = "Resource management application"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10.10"
+numpy = "^1.25.0"
+pandas = "^2.0.2"
+matplotlib = "^3.7.1"
+sqlalchemy = "^2.0.16"
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

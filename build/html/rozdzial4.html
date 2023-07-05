@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pl" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rozdział 4 &mdash; Sprzet dla bazy danych 1 - dokumentacja</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Indeks" href="genindex.html" />
+    <link rel="search" title="Szukaj" href="search.html" />
+    <link rel="prev" title="Rozdział 3" href="rozdzial3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Sprzet dla bazy danych
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Szukaj" aria-label="Szukaj" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Sprzęt dla bazy danych</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wstep.html">Rozdział 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rozdzial2.html">Rozdział 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rozdzial3.html">Rozdział 3</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Rozdział 4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#podsumowanie-raportowanie-danych-zebranych-w-bazie-danych">Podsumowanie / raportowanie danych zebranych w bazie danych.</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filtrowanie-filter-py">Filtrowanie (filter.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#statystyka-i-wykresy-summary-py">Statystyka i wykresy (summary.py)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generowanie-raportu-raportgenerator-py">Generowanie raportu (raportGenerator.py)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Sprzet dla bazy danych</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Rozdział 4</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rozdzial4.rst.txt" rel="nofollow"> Zobacz źródło strony</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rozdzial-4">
+<h1>Rozdział 4<a class="headerlink" href="#rozdzial-4" title="Permalink to this heading"></a></h1>
+<section id="podsumowanie-raportowanie-danych-zebranych-w-bazie-danych">
+<h2>Podsumowanie / raportowanie danych zebranych w bazie danych.<a class="headerlink" href="#podsumowanie-raportowanie-danych-zebranych-w-bazie-danych" title="Permalink to this heading"></a></h2>
+</section>
+<section id="filtrowanie-filter-py">
+<h2>Filtrowanie (filter.py)<a class="headerlink" href="#filtrowanie-filter-py" title="Permalink to this heading"></a></h2>
+<blockquote>
+<div><p>Po nawiązaniu połączenia z bazą danych, użytkownik może wybrać tabelę, następnie kolumnę i wartość filtru. Po wykonaniu filtracji, wyświetlane są wyniki lub informacja o ich braku. Użytkownik ma również opcję generowania raportu w formacie CSV na podstawie przefiltrowanych danych.</p>
+</div></blockquote>
+<p>Kod składa się z funkcji, które realizują konkretne operacje na bazie danych, takie jak sprawdzanie istnienia tabeli, pobieranie dostępnych tabel, pobieranie nazw kolumn, pobieranie wartości z kolumny oraz filtrowanie danych. Skrypt również importuje moduły zawierające funkcje do nawiązywania połączenia z bazą danych i generowania raportów.</p>
+<p>Główna pętla programu pozwala użytkownikowi na interaktywne wybieranie tabeli, kolumny i wartości filtru. Po wybraniu opcji, wywoływane są odpowiednie funkcje do pobierania danych i wyświetlania wyników lub generowania raportu.</p>
+</section>
+<section id="statystyka-i-wykresy-summary-py">
+<h2>Statystyka i wykresy (summary.py)<a class="headerlink" href="#statystyka-i-wykresy-summary-py" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Otwarcie pliku JSON z danymi połączenia z bazą danych.</p></li>
+<li><p>Tworzenie URI połączenia na podstawie danych z pliku JSON.</p></li>
+<li><p>Pobieranie danych z tabeli «data» i «service» z wykorzystaniem zapytań SQL i silnika SQLAlchemy.</p></li>
+<li><p>Obliczanie różnych podsumowań i udziałów procentowych na podstawie otrzymanych danych.</p></li>
+<li><p>Generowanie wykresu słupkowego na podstawie danych o typach urządzeń.</p></li>
+<li><p>Zapisywanie podsumowania i wykresu do pliku CSV.</p></li>
+<li><p>Wyświetlanie podsumowania na konsoli.</p></li>
+<li><p>Tworzenie katalogu „results” dla zapisanych wyników.</p></li>
+<li><p>Zapisywanie zakodowanego obrazu wykresu jako załącznika w pliku CSV.</p></li>
+<li><p>Wywołanie funkcji generującej raport podsumowujący.</p></li>
+</ol>
+</section>
+<section id="generowanie-raportu-raportgenerator-py">
+<h2>Generowanie raportu (raportGenerator.py)<a class="headerlink" href="#generowanie-raportu-raportgenerator-py" title="Permalink to this heading"></a></h2>
+<p>Importowanie modułów:
+csv: Moduł do obsługi plików CSV.
+os: Moduł do interakcji z systemem operacyjnym.
+from connection import get_database_connection: Importuje funkcję get_database_connection z modułu connection, która służy do nawiązywania połączenia z bazą danych.
+generate_report(table_name, column_name, filter_value=None, filename=»report.csv»): Funkcja generuje raport na podstawie danych z tabeli w bazie danych. Przyjmuje argumenty: table_name - nazwa tabeli, column_name - nazwa kolumny do filtrowania, filter_value - wartość filtru (opcjonalna, domyślnie None), filename - nazwa pliku raportu (opcjonalna, domyślnie «report.csv»).</p>
+<ol class="loweralpha simple">
+<li><p>Funkcja nawiązuje połączenie z bazą danych.</p></li>
+<li><p>Sprawdza istnienie tabeli i kolumny.</p></li>
+<li><p>Wykonuje filtrowanie danych na podstawie wartości w kolumnie.</p></li>
+<li><p>Jeśli są wyniki filtrowania, tworzy plik raportu w formacie CSV w katalogu „results” (jeśli nie istnieje, tworzy go). Plik zawiera nazwy kolumn i przefiltrowane wiersze.</p></li>
+<li><p>Wyświetla informację o utworzeniu i zapisaniu raportu, lub informację o braku wyników filtrowania.</p></li>
+<li><p>Zamyka kursor i połączenie z bazą danych.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rozdzial3.html" class="btn btn-neutral float-left" title="Rozdział 3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Poprzedni</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dlugi Janiszewski.</p>
+  </div>
+
+  Zbudowano w <a href="https://www.sphinx-doc.org/">Sphinx</a> używając
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    dostarczone przez <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

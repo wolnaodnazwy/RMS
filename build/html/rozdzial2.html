@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pl" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rozdział 2 &mdash; Sprzet dla bazy danych 1 - dokumentacja</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Indeks" href="genindex.html" />
+    <link rel="search" title="Szukaj" href="search.html" />
+    <link rel="next" title="Rozdział 3" href="rozdzial3.html" />
+    <link rel="prev" title="Rozdział 1" href="wstep.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Sprzet dla bazy danych
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Szukaj" aria-label="Szukaj" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Sprzęt dla bazy danych</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="wstep.html">Rozdział 1</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Rozdział 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#instrukcja-czesci-klienckiej">Instrukcja części klienckiej</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wprowadz-dane">1. Wprowadź dane:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zaimportuj-dane-do-sqlite">2.Zaimportuj dane do SQLite:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zaimportuj-dane-do-postgresql">3.Zaimportuj dane do PostgreSQL:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#utworz-strukture-bazy-danych">4.Utwórz strukturę bazy danych:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wstaw-dane-testowe">5. Wstaw dane testowe:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wyczysc-tabele">6.Wyczyść tabelę:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wyczysc-wszystkie-tabele-lub-baze-danych">7. Wyczyść wszystkie tabele lub bazę danych:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filtruj-dane-i-tworz-raporty">8. Filtruj dane i twórz raporty:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stworz-podsumowanie-danych">9. Stwórz podsumowanie danych:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#wyjdz-z-programu">10. Wyjdź z programu:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#omowienie-importu-danych-z-pliku-data-py-do-sqlite">Omówienie importu danych z pliku data.py do SQLite:</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rozdzial3.html">Rozdział 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rozdzial4.html">Rozdział 4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Sprzet dla bazy danych</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Rozdział 2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/rozdzial2.rst.txt" rel="nofollow"> Zobacz źródło strony</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rozdzial-2">
+<h1>Rozdział 2<a class="headerlink" href="#rozdzial-2" title="Permalink to this heading"></a></h1>
+<p>Stworzona aplikacja umożliwia zarządzanie bazą danych, która zajmuje się obsługą serwisową dla wskazanego budynku. Baza zawiera dane odnośnie dostepnego sprzętu oraz w którym pomieszczeniu jest zainstalowany. Można nazwać ją jako inwentaryzację sprzętową.</p>
+<section id="instrukcja-czesci-klienckiej">
+<h2>Instrukcja części klienckiej<a class="headerlink" href="#instrukcja-czesci-klienckiej" title="Permalink to this heading"></a></h2>
+<p>Dane w bazie są zbierane w dwóch tabelach. Pierwsza tabela posiada kolumny takie jak: Typ urządzenia, Numer seryjny, Lokalizacja, Data zakupu, Gwarancja.
+W drugiej tabeli zbierane są dane odnośnie przeglądów. Zawiera kolumny: Numer seryjny, Data przeglądu, Wynik przeglądu.
+Numer seryjny sprzętu jest kluczem głównym dla tej bazy.
+Obsługa serwisowa urządzeń części klienckiej odbywa się za pomocą konsoli. Uruchamiamy aplikację za pomocą pliku menagement.py.
+Oto opis każdej opcji menu wraz z odpowiadającymi im plikami:</p>
+</section>
+<section id="wprowadz-dane">
+<h2>1. Wprowadź dane:<a class="headerlink" href="#wprowadz-dane" title="Permalink to this heading"></a></h2>
+<p>Ta opcja pozwala na wprowadzenie danych do programu. Po uruchomieniu zadaje pytanie czy użytkownik chce dodać nowe dane. Po twierdzącej odpowiedzi, wprowadzamy dane:
+-„Podaj typ urządzenia: ”
+-„Podaj numer seryjny urządzenia: ”
+-„Podaj lokalizację urządzenia: ”
+-„Podaj datę zakupu urządzenia (yyyy-mm-dd): ”
+-„Czy urządzenie posiada gwarancję?: ”
+-„Podaj datę przeglądu (yyyy-mm-dd): ”
+-„Podaj wynik przeglądu: „</p>
+<p>Odpowiada za to plik: (data.py)</p>
+</section>
+<section id="zaimportuj-dane-do-sqlite">
+<h2>2.Zaimportuj dane do SQLite:<a class="headerlink" href="#zaimportuj-dane-do-sqlite" title="Permalink to this heading"></a></h2>
+<p>Ta opcja odpowiada za importowanie danych wprowadzonych z pliku .csv do bazy danych SQLite. Plik dataToDB.py zawiera skrypt, który wykonuje operacje związane z importem danych i zapisuje je w bazie danych SQLite.</p>
+<p>Odpowiada za to plik: (dataToDB.py)</p>
+</section>
+<section id="zaimportuj-dane-do-postgresql">
+<h2>3.Zaimportuj dane do PostgreSQL:<a class="headerlink" href="#zaimportuj-dane-do-postgresql" title="Permalink to this heading"></a></h2>
+<p>Ta opcja służy do importowania danych z bazy danych utworzonych w SQLite do bazy danych PostgreSQL. Skrypt importToPostgres.py zajmuje się operacjami związanymi z importem danych i zapisuje je w bazie danych PostgreSQL.</p>
+<p>Odpowiada za to plik: (importToPostgres.py)</p>
+<p>Dokładne omówienie importowania z SQLite do PostgreSQL zostanie przedstawione w rozdziale 3.</p>
+</section>
+<section id="utworz-strukture-bazy-danych">
+<h2>4.Utwórz strukturę bazy danych:<a class="headerlink" href="#utworz-strukture-bazy-danych" title="Permalink to this heading"></a></h2>
+<p>Ta opcja odpowiada za utworzenie struktury bazy danych. Skrypt createStructure.py zawiera definicje tabel, relacji i innych obiektów bazy danych, które są potrzebne do prawidłowego funkcjonowania programu.</p>
+<p>Odpowiada za to plik: (createStructure.py)</p>
+</section>
+<section id="wstaw-dane-testowe">
+<h2>5. Wstaw dane testowe:<a class="headerlink" href="#wstaw-dane-testowe" title="Permalink to this heading"></a></h2>
+<p>Ta opcja służy do wstawienia danych testowych do bazy danych. Plik testData.py zawiera skrypt, który posiada przykładowe dane testowe i wprowadza je do bazy danych.</p>
+<p>Odpowiada za to plik: (testData.py)</p>
+</section>
+<section id="wyczysc-tabele">
+<h2>6.Wyczyść tabelę:<a class="headerlink" href="#wyczysc-tabele" title="Permalink to this heading"></a></h2>
+<p>Ta opcja umożliwia wyczyszczenie zawartości wybranej tabeli w bazie danych. Użytkownik zostanie poproszony o podanie nazwy tabeli, a następnie skrypt clearDB.py wykonuje operacje usuwania danych z tej tabeli.</p>
+<p>Odpowiada za to plik: (clearDB.py)</p>
+</section>
+<section id="wyczysc-wszystkie-tabele-lub-baze-danych">
+<h2>7. Wyczyść wszystkie tabele lub bazę danych:<a class="headerlink" href="#wyczysc-wszystkie-tabele-lub-baze-danych" title="Permalink to this heading"></a></h2>
+<p>Ta opcja pozwala na wyczyszczenie wszystkich tabel w bazie danych lub całej bazy danych. Użytkownik zostanie poproszony o podanie odpowiedniego parametru (–all lub –drop), a następnie skrypt clearDB.py wykonuje odpowiednie operacje czyszczenia.</p>
+<p>Odpowiada za to plik: (clearDB.py)</p>
+</section>
+<section id="filtruj-dane-i-tworz-raporty">
+<h2>8. Filtruj dane i twórz raporty:<a class="headerlink" href="#filtruj-dane-i-tworz-raporty" title="Permalink to this heading"></a></h2>
+<p>Opcja implementuje filtrowanie danych i tworzenie raportów na podstawie określonych kryteriów.</p>
+<p>Odpowiadają za to pliki: (raportGenerator.py oraz filter.py)</p>
+</section>
+<section id="stworz-podsumowanie-danych">
+<h2>9. Stwórz podsumowanie danych:<a class="headerlink" href="#stworz-podsumowanie-danych" title="Permalink to this heading"></a></h2>
+<p>Agreguje dane i tworzy podsumowanie na podstawie określonych parametrów.</p>
+<p>Odpowiada za to plik: (summary.py)</p>
+</section>
+<section id="wyjdz-z-programu">
+<h2>10. Wyjdź z programu:<a class="headerlink" href="#wyjdz-z-programu" title="Permalink to this heading"></a></h2>
+<p>Opcja kończy działanie programu i zamyka go.</p>
+</section>
+<section id="omowienie-importu-danych-z-pliku-data-py-do-sqlite">
+<h2>Omówienie importu danych z pliku data.py do SQLite:<a class="headerlink" href="#omowienie-importu-danych-z-pliku-data-py-do-sqlite" title="Permalink to this heading"></a></h2>
+<p>1.Wczytanie danych o sprzęcie i przeglądach z plików CSV przy użyciu biblioteki pandas.
+2.Nawiązanie połączenia z bazą danych PostgreSQL poprzez wywołanie funkcji get_database_connection.
+3.Wywołanie funkcji create_table w celu utworzenia wymaganych tabel w bazie danych.
+4.Przekształcenie danych o sprzęcie i przeglądach z obiektów DataFrame na listy krotek.
+5.Wywołanie funkcji insert_equipment_data w celu wstawienia danych o sprzęcie do tabeli „data” w bazie danych.
+6.Wywołanie funkcji insert_service_data w celu wstawienia danych o przeglądach do tabeli „service” w bazie danych.
+7.Zatwierdzenie zmian w bazie danych poprzez wywołanie metody commit.
+8.Zamknięcie połączenia z bazą danych poprzez wywołanie metod close na obiektach kursora i połączenia.</p>
+<p># Sprawdzanie poprawności formatu daty</p>
+<blockquote>
+<div><dl class="simple">
+<dt>def validate_date_format(date):</dt><dd><p>pattern = r»^d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]d|3[01])$»</p>
+</dd>
+<dt>if re.match(pattern, date):</dt><dd><p>return True</p>
+</dd>
+<dt>else:</dt><dd><p>print(„Błędny format daty. Poprawny format: yyyy-mm-dd”)
+return False</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Sprawdzanie poprawności wartości enum</p>
+<blockquote>
+<div><blockquote>
+<div><p>def validate_enum_value(enum_type, value):
+enum_values = [val.lower() for val in enum_type]
+value_lower = value.lower()
+if value_lower in enum_values:</p>
+<blockquote>
+<div><p>return True</p>
+</div></blockquote>
+<dl class="simple">
+<dt>else:</dt><dd><p>print(f”Błędna wartość. Dostępne opcje: {», «.join(enum_values)}. Wprowadzona wartość: {value}”)
+return False</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Zbieranie danych z różnych źródeł</p>
+<blockquote>
+<div><blockquote>
+<div><p>def collect_data():
+equipment_data = []
+service_data = []</p>
+<p># Logika zbierania danych</p>
+<dl>
+<dt>while True:</dt><dd><p>choice = input(„Czy chcesz dodać informacje o sprzęcie? (Tak/Nie): „)
+if choice.lower() == «nie»:</p>
+<blockquote>
+<div><p>break</p>
+</div></blockquote>
+<p>elif choice.lower() == «tak»:</p>
+<blockquote>
+<div><blockquote>
+<div><p># Dodawanie informacji o sprzęcie</p>
+<p>device_type = input(„Podaj typ urządzenia: „)
+serial_number = input(„Podaj numer seryjny urządzenia: „)
+location = input(„Podaj lokalizację urządzenia: „)
+purchase_date = input(„Podaj datę zakupu urządzenia (yyyy-mm-dd): „)
+warranty = input(„Czy urządzenie posiada gwarancję?: „)</p>
+</div></blockquote>
+<p># Walidacja typu urządzenia</p>
+<blockquote>
+<div><blockquote>
+<div><dl class="simple">
+<dt>while not validate_enum_value([«Laptop», «Drukarka», «Smartphone», «Fax», «Komputer stacjonarny», «Tablet», «Router», «Skaner», «Projektor», «Serwer»], device_type):</dt><dd><p>device_type = input(„Podaj typ urządzenia: „)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Walidacja informacji o gwarancji</p>
+<blockquote>
+<div><dl class="simple">
+<dt>while not validate_enum_value([«Tak», «Nie»], warranty):</dt><dd><p>warranty = input(„Czy urządzenie posiada gwarancję?: „)</p>
+</dd>
+</dl>
+<p># Walidacja daty zakupu</p>
+<dl class="simple">
+<dt>while not validate_date_format(purchase_date):</dt><dd><p>purchase_date = input(„Podaj datę zakupu urządzenia (yyyy-mm-dd): „)</p>
+</dd>
+</dl>
+<p># Dodawanie informacji do zbioru danych</p>
+<dl class="simple">
+<dt>equipment_data.append({</dt><dd><p>«Typ urządzenia»: device_type.capitalize(),
+«Numer seryjny»: serial_number,
+«Lokalizacja»: location.capitalize(),
+«Data zakupu»: purchase_date,
+«Gwarancja»: warranty.capitalize()</p>
+</dd>
+</dl>
+<p>})</p>
+<p># Dodawanie informacji o przeglądzie</p>
+<p>service_date = input(„Podaj datę przeglądu (yyyy-mm-dd): „)
+service_result = input(„Podaj wynik przeglądu: „)</p>
+<p># Walidacja wyniku przeglądu</p>
+<dl class="simple">
+<dt>while not validate_enum_value([«Pozytywny», «Negatywny», «Wstrzymany»], service_result):</dt><dd><p>service_result = input(„Podaj wynik przeglądu: „)</p>
+</dd>
+</dl>
+<p># Walidacja daty przeglądu</p>
+<dl class="simple">
+<dt>while not validate_date_format(service_date):</dt><dd><p>service_date = input(„Podaj datę przeglądu (yyyy-mm-dd): „)</p>
+</dd>
+</dl>
+<p># Dodawanie informacji do zbioru danych</p>
+<dl class="simple">
+<dt>service_data.append({</dt><dd><p>«Numer seryjny»: serial_number,
+«Data przeglądu»: service_date,
+«Wynik przeglądu»: service_result.capitalize()</p>
+</dd>
+</dl>
+<p>})</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<dl class="simple">
+<dt>else:</dt><dd><p>print(f”Błędna odpowiedź! Proszę wybrać «Tak» lub «Nie».”)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<p># Zwracanie zebranych danych jako obiekt DataFrame z biblioteki pandas</p>
+<blockquote>
+<div><p>equipment_df = pd.DataFrame(equipment_data)
+service_df = pd.DataFrame(service_data)
+return equipment_df, service_df</p>
+</div></blockquote>
+</div></blockquote>
+</div></blockquote>
+<dl>
+<dt>def export_to_csv(dataframe, filename):</dt><dd><p>if os.path.isfile(filename):</p>
+<blockquote>
+<div><p># Jeśli plik istnieje, odczytaj istniejący plik CSV</p>
+<p>existing_data = pd.read_csv(filename)</p>
+<p># Połącz istniejące dane z nowymi danymi</p>
+<p>updated_data = pd.concat([existing_data, dataframe], ignore_index=True)</p>
+<p># Zapisz zaktualizowane dane do pliku CSV bez nagłówków</p>
+<p>updated_data.to_csv(filename, index=False)
+print(f”Dane zostały zaktualizowane w pliku {filename}.”)</p>
+</div></blockquote>
+<p>else:</p>
+<blockquote>
+<div><p># Jeśli plik nie istnieje, utwórz nowy plik CSV</p>
+<p>dataframe.to_csv(filename, index=False)
+print(f”Nowy plik {filename} został utworzony.”)</p>
+</div></blockquote>
+</dd>
+</dl>
+<p>def main():</p>
+<blockquote>
+<div><p># Główna funkcja programu</p>
+<p>equipment_data, service_data = collect_data()
+export_to_csv(equipment_data, «results/data.csv»)
+export_to_csv(service_data, «results/service.csv»)</p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wstep.html" class="btn btn-neutral float-left" title="Rozdział 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Poprzedni</a>
+        <a href="rozdzial3.html" class="btn btn-neutral float-right" title="Rozdział 3" accesskey="n" rel="next">Następny <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dlugi Janiszewski.</p>
+  </div>
+
+  Zbudowano w <a href="https://www.sphinx-doc.org/">Sphinx</a> używając
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    dostarczone przez <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
