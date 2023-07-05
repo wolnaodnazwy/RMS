@@ -13,4 +13,4 @@ def get_database_connection():
         port=creds['port_number']
     )
 
-    conn.close()
+    return conn

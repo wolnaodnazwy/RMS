@@ -1,7 +1,25 @@
 import pandas as pd
 import os.path
-from sqlalchemy import create_engine
-import subprocess
+import re
+
+def validate_date_format(date):
+    # Sprawdzanie poprawności formatu daty
+    pattern = r'^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$'
+    if re.match(pattern, date):
+        return True
+    else:
+        print("Błędny format daty. Poprawny format: yyyy-mm-dd")
+        return False
+    
+def validate_enum_value(enum_type, value):
+    # Sprawdzanie poprawności wartości enum
+    enum_values = [val.lower() for val in enum_type]
+    value_lower = value.lower()
+    if value_lower in enum_values:
+        return True
+    else:
+        print(f"Błędna wartość. Dostępne opcje: {', '.join(enum_values)}. Wprowadzona wartość: {value}")
+        return False
 
 def collect_data():
     # Zbieranie danych z różnych źródeł
@@ -18,29 +36,43 @@ def collect_data():
             device_type = input("Podaj typ urządzenia: ")
             serial_number = input("Podaj numer seryjny urządzenia: ")
             location = input("Podaj lokalizację urządzenia: ")
-            purchase_date = input("Podaj datę zakupu urządzenia: ")
-            warranty = input("Podaj informację o gwarancji urządzenia: ")
+            purchase_date = input("Podaj datę zakupu urządzenia (yyyy-mm-dd): ")
+            warranty = input("Czy urządzenie posiada gwarancję?: ")
+            # Walidacja typu urządzenia
+            while not validate_enum_value(['Laptop', 'Drukarka', 'Smartphone', 'Fax', 'Komputer stacjonarny', 'Tablet', 'Router', 'Skaner', 'Projektor', 'Serwer'], device_type):
+                device_type = input("Podaj typ urządzenia: ")
+            # Walidacja informacji o gwarancji
+            while not validate_enum_value(['Tak', 'Nie'], warranty):
+                warranty = input("Czy urządzenie posiada gwarancję?: ")
+            # Walidacja daty zakupu
+            while not validate_date_format(purchase_date):
+                purchase_date = input("Podaj datę zakupu urządzenia (yyyy-mm-dd): ")
             # Dodawanie informacji do zbioru danych
             equipment_data.append({
-                'Typ urządzenia': device_type,
+                'Typ urządzenia': device_type.capitalize(),
                 'Numer seryjny': serial_number,
-                'Lokalizacja': location,
+                'Lokalizacja': location.capitalize(),
                 'Data zakupu': purchase_date,
-                'Gwarancja': warranty
+                'Gwarancja': warranty.capitalize()
             })
         
-             # Dodawanie informacji o przeglądzie
-            service_date = input("Podaj datę przeglądu: ")
+            # Dodawanie informacji o przeglądzie
+            service_date = input("Podaj datę przeglądu (yyyy-mm-dd): ")
             service_result = input("Podaj wynik przeglądu: ")
+            # Walidacja wyniku przeglądu
+            while not validate_enum_value(['Pozytywny', 'Negatywny', 'Wstrzymany'], service_result):
+                service_result = input("Podaj wynik przeglądu: ")
+            # Walidacja daty przeglądu
+            while not validate_date_format(service_date):
+                service_date = input("Podaj datę przeglądu (yyyy-mm-dd): ")
             # Dodawanie informacji do zbioru danych
             service_data.append({
                 'Numer seryjny': serial_number,
                 'Data przeglądu': service_date,
-                'Wynik przeglądu': service_result
+                'Wynik przeglądu': service_result.capitalize()
             })
         else: 
              print(f"Błędna odpowiedź! Proszę wybrać 'Tak' lub 'Nie'.")
-    
 
     # Zwracanie zebranych danych jako obiekt DataFrame z biblioteki pandas
     equipment_df = pd.DataFrame(equipment_data)
@@ -66,9 +98,6 @@ def main():
     equipment_data, service_data = collect_data()
     export_to_csv(equipment_data, 'results/data.csv')
     export_to_csv(service_data, 'results/service.csv')
-    
-    # Uruchomienie drugiego skryptu
-    subprocess.run(['python', 'dataToDB.py'])
 
 if __name__ == '__main__':
     main()

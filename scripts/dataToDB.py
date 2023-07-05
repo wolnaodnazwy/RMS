@@ -4,18 +4,18 @@ import pandas as pd
 def create_table(conn):
     # Tworzenie tabeli w bazie danych
     conn.execute('''CREATE TABLE IF NOT EXISTS data (
-                        Typ_urzadzenia TEXT,
-                        Numer_seryjny TEXT,
+                        Typ_urzadzenia TEXT CHECK(Typ_urzadzenia IN ('Laptop', 'Drukarka', 'Smartphone', 'Fax', 'Komputer stacjonarny', 'Tablet', 'Router', 'Skaner', 'Projektor', 'Serwer')),
+                        Numer_seryjny VARCHAR PRIMARY KEY,
                         Lokalizacja TEXT,
                         Data_zakupu TEXT,
-                        Gwarancja TEXT
+                        Gwarancja TEXT CHECK(Gwarancja IN ('Tak', 'Nie'))
                     );''')
     
     # Tworzenie tabeli dla przeglądu
     conn.execute('''CREATE TABLE IF NOT EXISTS service (
-                        Numer_seryjny TEXT,
+                        Numer_seryjny VARCHAR REFERENCES data(Numer_seryjny),
                         Data_przegladu TEXT,
-                        Wynik_przegladu TEXT
+                        Wynik_przegladu TEXT CHECK(Wynik_przegladu IN ('Pozytywny', 'Negatywny', 'Wstrzymany'))
                     );''')
 
 def insert_equipment_data(conn, data):
@@ -59,7 +59,6 @@ def main():
     service_tuples = list(service_data[['Numer seryjny', 'Data przeglądu', 'Wynik przeglądu']].itertuples(index=False, name=None))
     # Wstawianie danych o przeglądzie do tabeli "service"
     insert_service_data(conn, service_tuples)
-
 
     # Zamykanie połączenia z bazą danych
     conn.close()
