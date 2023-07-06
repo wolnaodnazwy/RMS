@@ -3,7 +3,7 @@ Rozdział 4
 ===============
 
 Podsumowanie / raportowanie danych zebranych w bazie danych.
------------------------------- 
+------------------------------------------------------------
 
 Filtrowanie (filter.py)
 ------------------------------
@@ -14,7 +14,7 @@ Kod składa się z funkcji, które realizują konkretne operacje na bazie danych
 Główna pętla programu pozwala użytkownikowi na interaktywne wybieranie tabeli, kolumny i wartości filtru. Po wybraniu opcji, wywoływane są odpowiednie funkcje do pobierania danych i wyświetlania wyników lub generowania raportu.
 
 Statystyka i wykresy (summary.py)
-------------------------------
+-----------------------------------
 1. Otwarcie pliku JSON z danymi połączenia z bazą danych.
 2. Tworzenie URI połączenia na podstawie danych z pliku JSON.
 3. Pobieranie danych z tabeli 'data' i 'service' z wykorzystaniem zapytań SQL i silnika SQLAlchemy.
@@ -27,7 +27,7 @@ Statystyka i wykresy (summary.py)
 10. Wywołanie funkcji generującej raport podsumowujący.
 
 Generowanie raportu (raportGenerator.py)
-------------------------------
+---------------------------------------------
 Importowanie modułów:
 csv: Moduł do obsługi plików CSV.
 os: Moduł do interakcji z systemem operacyjnym.

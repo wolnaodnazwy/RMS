@@ -72,7 +72,7 @@ Odpowiadają za to pliki: (raportGenerator.py oraz filter.py)
 
 9. Stwórz podsumowanie danych: 
 ---------------------------------------------
-Agreguje dane i tworzy podsumowanie na podstawie określonych parametrów.
+Generuje raport podsumowujący dane z bazy danych. Raport zawiera informacje na temat liczby urządzeń, liczby przeglądów, średniej liczby urządzeń na lokalizację oraz procentowego podziału przeglądów. Wygenerowany raport jest zapisywany jako plik CSV z załączonym plikiem obrazu wykresu.
 
 Odpowiada za to plik: (summary.py)
 
@@ -81,7 +81,7 @@ Odpowiada za to plik: (summary.py)
 Opcja kończy działanie programu i zamyka go.
 
 
-Omówienie importu danych z pliku data.py do SQLite:
+Omówienie importu danych z plików CSV do SQLite:
 ------------------------------------------------------------
 1.Wczytanie danych o sprzęcie i przeglądach z plików CSV przy użyciu biblioteki pandas.
 2.Nawiązanie połączenia z bazą danych PostgreSQL poprzez wywołanie funkcji get_database_connection.

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="pl" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rozdział 3 &mdash; Sprzet dla bazy danych 1 - dokumentacja</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Indeks" href="../genindex.html" />
+    <link rel="search" title="Szukaj" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Sprzet dla bazy danych
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Szukaj" aria-label="Szukaj" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Sprzęt dla bazy danych</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../wstep.html">Rozdział 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rozdzial2.html">Rozdział 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rozdzial3.html">Rozdział 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../rozdzial4.html">Rozdział 4</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Sprzet dla bazy danych</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Rozdział 3</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/.ipynb_checkpoints/rozdzial3-checkpoint.rst.txt" rel="nofollow"> Zobacz źródło strony</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rozdzial-3">
+<h1>Rozdział 3<a class="headerlink" href="#rozdzial-3" title="Permalink to this heading"></a></h1>
+<p>Stworzona aplikacja umożliwia zarządzanie bazą danych, która zajmuje się obsługą serwisową dla wskazanego budynku. Baza zawiera dane odnośnie dostepnego sprzętu oraz to gdzie się znajduje. Można nazwać ją jako inwentaryzację sprzętową. Numer seryjny sprzętu jest kluczem głównym dla tej bazy.</p>
+<section id="opis-dzialania-konwertowania-z-sqlite-do-postgresql">
+<h2>Opis działania konwertowania z SQLite do PostgreSQL<a class="headerlink" href="#opis-dzialania-konwertowania-z-sqlite-do-postgresql" title="Permalink to this heading"></a></h2>
+<p>1.Wczytuje dane o sprzęcie i przeglądach z plików CSV przy użyciu biblioteki pandas.
+2.Nawiązuje połączenie z bazą danych PostgreSQL poprzez wywołanie funkcji get_database_connection.
+3.Wywołuje funkcję create_table, aby utworzyć wymagane tabele w bazie danych.
+4.Przekształca dane o sprzęcie i przeglądach z obiektów DataFrame na listy krotek.
+5.Wywołuje funkcję insert_equipment_data, aby wstawić dane o sprzęcie do tabeli „data” w bazie danych.
+6.Wywołuje funkcję insert_service_data, aby wstawić dane o przeglądach do tabeli „service” w bazie danych.
+7.Zatwierdza zmiany w bazie danych przy użyciu metody commit.
+8.Zamyka połączenie z bazą danych przez wywołanie metod close na obiektach kursora i połączenia.
+9.Na końcu, sprawdzane jest, czy skrypt jest uruchomiony jako plik główny, a jeśli tak, to wywoływana jest funkcja main w celu wykonania programu.</p>
+</section>
+<section id="kod-z-omowieniem">
+<h2>Kod z omówieniem<a class="headerlink" href="#kod-z-omowieniem" title="Permalink to this heading"></a></h2>
+<p>import pandas as pd
+import simplejson
+from connection import get_database_connection</p>
+<p># Sprawdzenie, czy typy enum już istnieją</p>
+<dl class="simple">
+<dt>def create_table(cursor):</dt><dd><p>cursor.execute(„SELECT EXISTS(SELECT 1 FROM pg_type WHERE typname = «typ_urzadzenia_enum»)”)
+typ_urzadzenia_exists = cursor.fetchone()[0]
+cursor.execute(„SELECT EXISTS(SELECT 1 FROM pg_type WHERE typname = «gwarancja_enum»)”)
+gwarancja_exists = cursor.fetchone()[0]
+cursor.execute(„SELECT EXISTS(SELECT 1 FROM pg_type WHERE typname = «wynik_przegladu_enum»)”)
+wynik_przegladu_exists = cursor.fetchone()[0]</p>
+</dd>
+</dl>
+<p># Tworzenie typu enum «Typ_urzadzenia», jeśli nie istnieje</p>
+<blockquote>
+<div><dl class="simple">
+<dt>if not typ_urzadzenia_exists:</dt><dd><p>cursor.execute(„CREATE TYPE Typ_urzadzenia_enum AS ENUM («Laptop», «Drukarka», «Smartphone», «Fax», «Komputer stacjonarny», «Tablet», «Router», «Skaner», «Projektor», «Serwer»);”)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Tworzenie typu enum «Gwarancja», jeśli nie istnieje</p>
+<blockquote>
+<div><dl class="simple">
+<dt>if not gwarancja_exists:</dt><dd><p>cursor.execute(„CREATE TYPE Gwarancja_enum AS ENUM («Tak», «Nie»);”)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Tworzenie tabeli «data», jeśli nie istnieje</p>
+<blockquote>
+<div><dl>
+<dt>cursor.execute(«»»CREATE TABLE IF NOT EXISTS data (</dt><dd><blockquote>
+<div><p>Typ_urzadzenia Typ_urzadzenia_enum,
+Numer_seryjny VARCHAR PRIMARY KEY,
+Lokalizacja VARCHAR,
+Data_zakupu DATE,
+Gwarancja Gwarancja_enum</p>
+</div></blockquote>
+<p>);»»»)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Tworzenie typu enum «Wynik_przegladu», jeśli nie istnieje</p>
+<blockquote>
+<div><dl class="simple">
+<dt>if not wynik_przegladu_exists:</dt><dd><p>cursor.execute(„CREATE TYPE Wynik_przegladu_enum AS ENUM («Pozytywny», «Negatywny», «Wstrzymany»);”)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Tworzenie tabeli «service», jeśli nie istnieje</p>
+<blockquote>
+<div><dl>
+<dt>cursor.execute(«»»CREATE TABLE IF NOT EXISTS service (</dt><dd><blockquote>
+<div><p>Numer_seryjny TEXT REFERENCES data(Numer_seryjny),
+Data_przegladu DATE,
+Wynik_przegladu Wynik_przegladu_enum</p>
+</div></blockquote>
+<p>);»»»)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p># Wstawianie danych o sprzęcie do tabeli w bazie danych</p>
+<dl>
+<dt>def insert_equipment_data(cursor, data):</dt><dd><dl>
+<dt>cursor.executemany(«»»INSERT INTO data (</dt><dd><blockquote>
+<div><p>Typ_urzadzenia, Numer_seryjny, Lokalizacja,
+Data_zakupu, Gwarancja</p>
+</div></blockquote>
+<p>) VALUES (%s, %s, %s, %s, %s);»»», data)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p># Wstawianie danych o przeglądzie do tabeli w bazie danych</p>
+<dl>
+<dt>def insert_service_data(cursor, data):</dt><dd><dl>
+<dt>cursor.executemany(«»»INSERT INTO service (</dt><dd><blockquote>
+<div><p>Numer_seryjny,
+Data_przegladu,
+Wynik_przegladu</p>
+</div></blockquote>
+<p>) VALUES (%s, %s, %s);»»», data)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>def main():
+# Ładowanie danych z pliku CSV</p>
+<blockquote>
+<div><p>equipment_data = pd.read_csv(«results/data.csv»)
+service_data = pd.read_csv(«results/service.csv»)</p>
+</div></blockquote>
+<p># Nawiązywanie połączenia z bazą danych PostgreSQL</p>
+<blockquote>
+<div><p>conn = get_database_connection()
+cursor = conn.cursor()</p>
+</div></blockquote>
+<p># Tworzenie tabeli w bazie danych PostgreSQL</p>
+<blockquote>
+<div><p>create_table(cursor)
+conn.commit()</p>
+</div></blockquote>
+<p># Przekształcenie danych o sprzęcie z DataFrame na listę krotek</p>
+<blockquote>
+<div><p>equipment_tuples = [tuple(row) for row in equipment_data.itertuples(index=False)]
+# Wstawianie danych o sprzęcie do tabeli „data”
+insert_equipment_data(cursor, equipment_tuples)</p>
+</div></blockquote>
+<p># Przekształcenie danych o przeglądzie z DataFrame na listę krotek</p>
+<blockquote>
+<div><p>service_tuples = [tuple(row) for row in service_data[[«Numer seryjny», «Data przeglądu», «Wynik przeglądu»]].itertuples(index=False)]</p>
+</div></blockquote>
+<p># Wstawianie danych o przeglądzie do tabeli „service”</p>
+<blockquote>
+<div><p>insert_service_data(cursor, service_tuples)</p>
+</div></blockquote>
+<p># Zatwierdzanie zmian w bazie danych PostgreSQL</p>
+<blockquote>
+<div><p>conn.commit()</p>
+</div></blockquote>
+<p># Zamykanie połączenia</p>
+<blockquote>
+<div><p>cursor.close()
+conn.close()</p>
+</div></blockquote>
+<dl class="simple">
+<dt>if __name__ == «__main__»:</dt><dd><p>main()</p>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Dlugi Janiszewski.</p>
+  </div>
+
+  Zbudowano w <a href="https://www.sphinx-doc.org/">Sphinx</a> używając
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    dostarczone przez <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
